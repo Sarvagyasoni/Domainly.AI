@@ -84,3 +84,46 @@ DOMAINLY.AI - GAMING KNOWLEDGE BASE
   fidelity 3D graphics and AAA-style projects.
 - Godot: open-source, lightweight, GDScript (Python-like) or C#,
   popular for 2D and smaller-scale 3D projects.
+
+=== AIM, POSITIONING, AND DECISION MAKING ===
+- Crosshair placement reduces the distance needed to adjust when an enemy
+  appears. Keep it near likely threat locations and at expected target
+  height rather than pointing at the floor.
+- Positioning should provide cover, an escape route, and useful sightlines.
+  Avoid exposing yourself to several angles simultaneously.
+- Isolate fights when outnumbered by using terrain to make opponents engage
+  one at a time. Numbers advantage usually matters more than flashy mechanics.
+- Track cooldowns, ammunition, economy, and objective timing. Strong players
+  win by acting when opponents have fewer resources, not only through aim.
+- After each loss, identify one controllable decision to improve. Blaming
+  matchmaking or teammates produces little actionable learning.
+
+=== PC PERFORMANCE TROUBLESHOOTING ===
+- Measure before changing settings: record frame rate, frame-time graph,
+  GPU utilization, CPU-per-core load, temperature, and memory use.
+- Stuttering may come from shader compilation, storage access, insufficient
+  RAM/VRAM, thermal throttling, background software, or unstable drivers.
+- Lower GPU-heavy settings such as resolution, ray tracing, shadows, and
+  volumetrics when GPU-bound. Simulation density and view distance often
+  affect the CPU more strongly.
+- Exclusive fullscreen is not always faster on modern operating systems;
+  test fullscreen and borderless modes on the actual game and system.
+- Change one setting at a time and keep notes so improvement is attributable.
+
+=== ACCESSIBILITY AND HEALTHY PLAY ===
+- Useful accessibility options include remappable controls, subtitles with
+  speaker labels, scalable UI, color-blind-safe indicators, aim assistance,
+  difficulty options, and reduced motion or flashing effects.
+- Ergonomics matter during long sessions: neutral wrist position, supported
+  posture, comfortable display height, hydration, and regular movement breaks.
+- A sustainable practice schedule combines focused drills, real matches,
+  review, sleep, and recovery. Excessive volume with declining attention can
+  reinforce mistakes instead of improving skill.
+
+=== TEAMWORK AND COMMUNICATION ===
+- Good callouts state location, number of opponents, useful damage/status,
+  and direction of travel. Avoid narrating every action or arguing mid-round.
+- Before a team engagement, establish the win condition: objective control,
+  priority target, resource advantage, or safe disengagement.
+- Constructive review discusses observable decisions and alternatives, not a
+  teammate's personality. Psychological safety improves team learning.

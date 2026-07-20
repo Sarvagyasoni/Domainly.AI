@@ -53,11 +53,10 @@ class GeminiProvider:
         self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
     def _offline_response(self, prompt: str) -> str:
-        prompt_preview = prompt[:120].replace("\n", " ").strip()
         return (
             "I’m currently running in offline mode. "
             "Configure GEMINI_API_KEY to enable live AI responses. "
-            f"Your request: {prompt_preview}"
+            "Restart the backend after adding the key."
         )
 
     def generate_response(self, prompt: str) -> str:

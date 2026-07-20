@@ -84,3 +84,57 @@ DOMAINLY.AI - CONTENT CREATOR KNOWLEDGE BASE
   allows it, rather than guessing.
 - Audience retention graphs (YouTube) reveal exactly where viewers drop
   off, which is more actionable than an average view duration alone.
+
+=== AUDIENCE RESEARCH AND POSITIONING ===
+- Define a specific audience, transformation, and point of view: who the
+  content serves, what outcome it helps create, and why this creator's angle
+  is distinct.
+- Mine comments, search suggestions, communities, sales calls, and support
+  questions for the audience's exact language. Save ideas in a searchable
+  content backlog tagged by problem and funnel stage.
+- Separate evergreen topics that compound through search from timely topics
+  that capture current attention. A resilient calendar deliberately uses both.
+- Build recurring series and recognizable formats. Familiar packaging lowers
+  the audience's effort to decide whether to watch while topics stay fresh.
+
+=== WRITING HOOKS AND SCRIPTS ===
+- A strong hook quickly establishes relevance, tension, curiosity, or a clear
+  promised outcome without delaying the payoff with a long introduction.
+- Structure educational content as problem, stakes, insight, example, action.
+  Stories often use setup, escalating conflict, turning point, and resolution.
+- Use concrete nouns, active verbs, examples, and visual evidence. Remove
+  sentences that repeat the same promise without adding information.
+- Pattern interrupts—camera changes, graphics, examples, questions, or shifts
+  in pacing—can restore attention, but excessive edits may reduce clarity.
+- End with one context-appropriate call to action rather than several competing
+  requests. The next step should match the viewer's level of intent.
+
+=== THUMBNAILS, TITLES, AND PACKAGING ===
+- Title and thumbnail should create one complementary idea, not repeat the
+  same words. They must accurately represent the content to avoid poor
+  satisfaction and long-term loss of trust.
+- Thumbnail designs benefit from one focal point, readable contrast, minimal
+  text, and testing at small mobile size before publication.
+- Maintain several title and thumbnail concepts before production; packaging
+  can shape the opening and evidence the content must deliver.
+- Click-through rate must be read with impressions, traffic source, retention,
+  and satisfaction. A lower CTR can be healthy when distribution reaches a
+  much broader audience.
+
+=== COMMUNITY AND BRAND ===
+- Respond to early comments with useful follow-up questions, turn repeated
+  audience questions into future posts, and recognize returning contributors.
+- Establish brand guidelines for voice, visual system, claims, sponsorships,
+  and topics that are out of bounds. Consistency makes delegation easier.
+- Community spaces require moderation rules and enforcement to prevent spam,
+  harassment, and unsafe advice from driving away valuable participants.
+
+=== SPONSORSHIPS AND ETHICS ===
+- Evaluate sponsor fit, product evidence, audience relevance, exclusivity,
+  usage rights, revision limits, payment terms, and cancellation clauses.
+- Clearly disclose paid relationships and affiliate incentives according to
+  applicable law and platform policy. Disclosure protects audience trust.
+- Do not promise guaranteed reach or conversions. Report agreed metrics with
+  context and distinguish organic results from paid amplification.
+- Maintain editorial independence: decline products you cannot honestly assess
+  and avoid unsupported health, financial, or performance claims.

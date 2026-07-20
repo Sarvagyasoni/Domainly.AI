@@ -75,3 +75,57 @@ DOMAINLY.AI - STARTUP KNOWLEDGE BASE
 - Legal basics: choose an entity structure (e.g. LLC, C-Corp) based on
   fundraising plans and tax considerations; formalize IP ownership and
   co-founder agreements early to avoid disputes later.
+
+=== CUSTOMER DISCOVERY ===
+- Interview recent real behavior rather than hypothetical intention. Ask
+  when the problem last occurred, how it was handled, what it cost, and who
+  controls the buying decision.
+- Avoid pitching during discovery. Leading questions create compliments,
+  not evidence. Strong evidence includes paid pilots, repeated use, referrals,
+  signed letters of intent, and customers giving time or data.
+- Separate user, buyer, approver, and beneficiary when selling to businesses;
+  each may value different outcomes and raise different objections.
+- Synthesize interviews into repeated problems, triggers, alternatives, and
+  desired outcomes. Do not overgeneralize from one enthusiastic respondent.
+
+=== PRICING AND UNIT ECONOMICS ===
+- Price around customer value and willingness to pay, not solely development
+  cost. Test packages and price points directly with the target segment.
+- Contribution margin is revenue minus variable costs. A business can show
+  revenue growth while losing money on every additional transaction.
+- CAC payback period measures how long gross profit takes to recover customer
+  acquisition cost. Shorter payback reduces working-capital pressure.
+- Net revenue retention includes expansion, contraction, and churn from an
+  existing customer cohort. Above 100% means expansion exceeds losses.
+- Cohort analysis groups customers by start period or behavior and reveals
+  whether retention is improving beneath aggregate growth.
+
+=== MVP SCOPE AND PRODUCT ROADMAP ===
+- Define the riskiest assumption first, then build the cheapest experiment
+  capable of disproving it. An MVP is a learning instrument, not simply a
+  low-quality version of the final product.
+- Prioritize with expected impact, confidence, effort, and strategic fit.
+  Keep a written list of what is explicitly out of scope.
+- Instrument activation and retention before launch so learning does not
+  depend only on anecdotes.
+- A roadmap should communicate problems and desired outcomes, while near-term
+  delivery plans may contain specific features and dates.
+
+=== SALES AND GO-TO-MARKET ===
+- Choose an initial ideal customer profile with a shared painful problem,
+  buying process, budget, and reachable channel.
+- Founder-led sales teaches objections and language before the process is
+  delegated. Document qualification, discovery, demonstration, proposal,
+  negotiation, and follow-up stages.
+- Sales-led motion fits complex, high-value products; product-led motion fits
+  products users can adopt independently; many businesses use a hybrid.
+- Forecast using stage conversion rates and realistic sales-cycle length,
+  not the total headline value of every lead in the pipeline.
+
+=== OPERATIONS AND TEAM ===
+- Define founder responsibilities, decision rights, vesting, IP assignment,
+  compensation expectations, and a process for deadlocks or departures.
+- Hire when a recurring bottleneck is understood and valuable work exists,
+  not merely because funding arrived. Contractors can validate a role first.
+- Maintain a rolling cash forecast with base, upside, and downside scenarios.
+  Start fundraising well before cash becomes critical because rounds take time.

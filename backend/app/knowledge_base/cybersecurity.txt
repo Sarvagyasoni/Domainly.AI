@@ -90,3 +90,46 @@ DOMAINLY.AI - CYBERSECURITY KNOWLEDGE BASE
 - The strongest technical controls can be bypassed by tricking a human -
   security awareness training is a necessary complement to technical
   defenses, not optional.
+
+=== IDENTITY AND ACCESS MANAGEMENT ===
+- Authentication factors are something you know (password), have
+  (hardware token), or are (biometric). MFA should combine different
+  factor types rather than two passwords.
+- Passwords should be stored with a password-specific adaptive hash such
+  as Argon2id, bcrypt, or scrypt, with unique salts. General-purpose fast
+  hashes such as SHA-256 are unsuitable for password storage by themselves.
+- Short-lived access tokens reduce exposure. Refresh tokens need secure
+  storage, rotation, revocation, and reuse detection.
+- Service accounts should have narrow permissions, managed credentials,
+  and an accountable owner. Remove dormant accounts promptly.
+
+=== CLOUD AND CONTAINER SECURITY ===
+- Cloud security uses a shared-responsibility model: the provider secures
+  the underlying cloud, while customers remain responsible for identities,
+  configuration, application code, and their data.
+- Public storage buckets, overly broad IAM roles, and exposed management
+  interfaces are common cloud misconfigurations. Continuously scan them.
+- Container images should be minimal, pinned, vulnerability-scanned, and
+  run as a non-root user. Never bake secrets into an image layer.
+- Kubernetes workloads need resource limits, network policies, restricted
+  security contexts, and tightly scoped service-account permissions.
+
+=== THREAT MODELING AND RISK ===
+- Start threat modeling by identifying assets, trust boundaries, entry
+  points, actors, and realistic abuse cases before choosing controls.
+- STRIDE groups threats into Spoofing, Tampering, Repudiation, Information
+  Disclosure, Denial of Service, and Elevation of Privilege.
+- Risk is commonly evaluated from likelihood and impact. Prioritize fixes
+  that materially reduce probable business harm, not merely raw finding
+  counts.
+- A vulnerability is a weakness; a threat is a potential cause of harm;
+  risk combines the chance of exploitation with its consequence.
+
+=== SAFE SECURITY TESTING ===
+- Obtain explicit written authorization and define scope, timing, allowed
+  techniques, data handling, and emergency contacts before testing.
+- Prefer isolated labs, capture-the-flag environments, and intentionally
+  vulnerable applications for learning. Do not test systems you do not own
+  or lack permission to assess.
+- Report findings with evidence, business impact, reproduction conditions,
+  and remediation guidance while minimizing access to sensitive data.

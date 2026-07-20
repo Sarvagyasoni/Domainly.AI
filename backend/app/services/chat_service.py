@@ -27,11 +27,16 @@ class ChatService:
         message: str,
         history: list,
     ) -> str:
-        knowledge = KnowledgeBaseService.get_knowledge(domain)
-        if knowledge:
-            logger.info("Knowledge base loaded for domain: %s", domain)
+        chunks = KnowledgeBaseService.retrieve(domain, message)
+        knowledge = KnowledgeBaseService.format_context(chunks)
+        if chunks:
+            logger.info(
+                "Retrieved %s knowledge chunks for domain: %s",
+                len(chunks),
+                domain,
+            )
         else:
-            logger.info("No knowledge base file found for domain: %s", domain)
+            logger.info("No relevant knowledge found for domain: %s", domain)
         return PromptBuilder.build(
             domain,
             message,

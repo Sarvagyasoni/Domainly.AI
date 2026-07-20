@@ -1,5 +1,6 @@
 # Python local envs and caches
 backend/.venv/
+backend/.env
 backend/__pycache__/
 backend/*.pyc
 backend/app/storage/

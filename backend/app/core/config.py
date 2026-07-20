@@ -68,6 +68,18 @@ class Settings:
         os.getenv("MAX_RETRIES", 3)
     )
     # ==========================================================
+    # Local RAG Configuration
+    # ==========================================================
+    RAG_TOP_K = int(
+        os.getenv("RAG_TOP_K", 3)
+    )
+    RAG_CHUNK_SIZE = int(
+        os.getenv("RAG_CHUNK_SIZE", 180)
+    )
+    RAG_CHUNK_OVERLAP = int(
+        os.getenv("RAG_CHUNK_OVERLAP", 30)
+    )
+    # ==========================================================
     # Frontend
     # ==========================================================
     FRONTEND_URL = os.getenv(

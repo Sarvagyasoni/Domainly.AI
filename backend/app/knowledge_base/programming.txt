@@ -115,3 +115,63 @@ Choosing a data structure:
 - Comment on "why", not "what" - the code itself should explain what
   it does if it's well-named; comments should explain reasoning that
   isn't obvious from the code.
+
+=== PYTHON FUNDAMENTALS ===
+- Python variables hold references to objects. Assignment does not copy
+  an object; two names can point to the same mutable list or dictionary.
+- Use `is None` for None checks and `==` for value equality. The `is`
+  operator tests object identity, not whether two values look equal.
+- Avoid mutable default arguments such as `def add(item, items=[])`.
+  Create the list inside the function or use None as the default.
+- List comprehensions are best for readable transformations and filters;
+  use a normal loop when there are several branches or side effects.
+- Generators use `yield` to produce values lazily. They reduce memory use
+  when processing large sequences or streaming results.
+- Context managers (`with`) guarantee cleanup of files, locks, and other
+  resources even when an exception occurs.
+- Type hints improve editor support and maintainability but are not
+  enforced by Python at runtime without a validation or checking tool.
+
+=== ASYNC AND CONCURRENCY ===
+- Concurrency means tasks make progress during overlapping periods;
+  parallelism means tasks literally execute at the same time.
+- `asyncio` is most useful for I/O-bound work such as HTTP requests and
+  database calls. Await operations that would otherwise block the event
+  loop; CPU-heavy work should use a process pool or worker system.
+- Threads share memory and are useful for blocking I/O, but shared state
+  requires careful synchronization. Processes isolate memory and can use
+  multiple CPU cores at greater communication cost.
+- A race condition occurs when results depend on unpredictable operation
+  ordering. Locks, queues, transactions, immutability, and idempotent
+  operations are common defenses.
+- Async code is not automatically faster. It improves throughput when a
+  program spends substantial time waiting for external resources.
+
+=== WEB BACKEND ARCHITECTURE ===
+- A layered backend commonly separates routes, schemas, services,
+  repositories, and external providers. Routes translate HTTP; services
+  enforce business rules; repositories isolate persistence.
+- Dependency injection supplies collaborators instead of constructing
+  them deep inside business logic, making replacement and unit testing
+  easier.
+- Authentication proves who a caller is; authorization decides what that
+  identity may access. Always enforce authorization on the server.
+- Idempotency means repeating an operation has the same intended effect.
+  GET, PUT, and DELETE should generally be idempotent; POST often is not.
+- Background jobs are appropriate for slow, retryable work such as email,
+  report generation, and media processing. Return a job identifier rather
+  than keeping an HTTP request open indefinitely.
+
+=== DEPLOYMENT AND OBSERVABILITY ===
+- Configuration belongs in environment variables or a secrets manager;
+  validate required configuration during startup rather than failing on
+  the first live request.
+- Structured logs should contain timestamps, severity, component, and
+  correlation/request IDs while excluding credentials and private data.
+- Metrics answer aggregate questions such as error rate and latency;
+  traces follow one request across components; logs provide event detail.
+- Health checks should distinguish liveness (process should restart) from
+  readiness (process can currently accept traffic).
+- Use timeouts on every network call, bounded retries with exponential
+  backoff and jitter, and circuit breakers for persistently failing
+  dependencies. Only retry operations that are safe to repeat.

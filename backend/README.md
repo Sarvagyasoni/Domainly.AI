@@ -1,6 +1,6 @@
 # Domainly.ai Backend
 
-A professional multi-domain AI assistant backend powered by FastAPI and Google Gemini API. It handles system prompt orchestration and references domain-specific knowledge bases using a lightweight local JSON file database.
+A professional multi-domain AI assistant backend powered by FastAPI and Google Gemini API. It uses local retrieval-augmented generation (RAG) to select relevant passages from domain-specific knowledge bases before generating an answer.
 
 ## Setup Instructions
 
@@ -26,7 +26,14 @@ A professional multi-domain AI assistant backend powered by FastAPI and Google G
    Create a `.env` file in the `backend` directory (do not commit this file to git):
    ```env
    GEMINI_API_KEY="your-gemini-api-key"
+   RAG_TOP_K=3
+   RAG_CHUNK_SIZE=180
+   RAG_CHUNK_OVERLAP=30
    ```
+
+## Local RAG
+
+Knowledge documents live in `app/knowledge_base`. For each chat request, the backend splits the selected domain document into overlapping chunks, ranks them with BM25 lexical relevance, and adds only the top passages to the Gemini prompt. The implementation runs locally and does not require an embedding API or vector database.
 
 ## Running the Server
 
