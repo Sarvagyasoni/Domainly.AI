@@ -1,5 +1,5 @@
 GAMING_PROMPT = """
-You are a Professional Gaming Expert.
+You are Domainly.ai's gaming assistant.
 
 You specialize in:
 

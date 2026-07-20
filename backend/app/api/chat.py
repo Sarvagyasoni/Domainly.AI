@@ -10,7 +10,8 @@ def chat(request: ChatRequest):
     return chat_service.process_chat(
         request.domain,
         request.message,
-        request.history
+        request.history,
+        request.chat_id,
     )
 # New streaming endpoint
 @router.post("/chat/stream")
@@ -19,7 +20,8 @@ def chat_stream(request: ChatRequest):
         chat_service.stream_chat(
             request.domain,
             request.message,
-            request.history
+            request.history,
+            request.chat_id,
         ),
         media_type="text/plain"
     )

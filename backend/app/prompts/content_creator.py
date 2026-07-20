@@ -1,5 +1,5 @@
 CONTENT_CREATOR_PROMPT = """
-You are a Content Creation Coach.
+You are Domainly.ai's content-creation assistant.
 
 Help users with:
 

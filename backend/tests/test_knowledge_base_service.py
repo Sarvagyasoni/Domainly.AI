@@ -3,17 +3,47 @@ import unittest
 from pathlib import Path
 
 from app.services.knowledge_base_service import KnowledgeBaseService
+from app.services.vector_index_service import VectorIndexService
+
+
+class FakeEmbeddingProvider:
+    available = True
+    model = "fake-embedding-model"
+    dimensions = 2
+
+    def __init__(self):
+        self.document_calls = 0
+
+    def embed_documents(self, texts):
+        self.document_calls += 1
+        return [
+            [1.0, 0.0] if "Retention" in text else [0.0, 1.0]
+            for text in texts
+        ]
+
+    def embed_query(self, text):
+        return [1.0, 0.0]
+
+
+class OfflineEmbeddingProvider:
+    available = False
 
 
 class KnowledgeBaseServiceTests(unittest.TestCase):
     def setUp(self):
         self.original_base_dir = KnowledgeBaseService.BASE_DIR
+        self.original_provider = KnowledgeBaseService.embedding_provider
+        self.original_index_dir = VectorIndexService.INDEX_DIR
         self.temp_directory = tempfile.TemporaryDirectory()
         KnowledgeBaseService.BASE_DIR = Path(self.temp_directory.name)
+        KnowledgeBaseService.embedding_provider = OfflineEmbeddingProvider()
+        VectorIndexService.INDEX_DIR = Path(self.temp_directory.name) / "indexes"
         KnowledgeBaseService.clear_cache()
 
     def tearDown(self):
         KnowledgeBaseService.BASE_DIR = self.original_base_dir
+        KnowledgeBaseService.embedding_provider = self.original_provider
+        VectorIndexService.INDEX_DIR = self.original_index_dir
         KnowledgeBaseService.clear_cache()
         self.temp_directory.cleanup()
 
@@ -69,6 +99,34 @@ Parameterized queries help prevent SQL injection.
 
         self.assertIn("Source: programming.txt", context)
         self.assertIn("Section: Security", context)
+
+    def test_vector_search_finds_semantic_match_without_shared_words(self):
+        self._write_knowledge(
+            """=== RETENTION ===
+Churn measures the rate at which subscribers cancel a product.
+
+=== ASYNC PYTHON ===
+Asyncio coordinates concurrent I/O operations.
+"""
+        )
+        provider = FakeEmbeddingProvider()
+        KnowledgeBaseService.embedding_provider = provider
+
+        chunks = KnowledgeBaseService.retrieve(
+            "programming",
+            "Why are my customers disappearing?",
+            top_k=1,
+        )
+
+        self.assertEqual(chunks[0].section, "Retention")
+        self.assertEqual(provider.document_calls, 1)
+
+        KnowledgeBaseService.retrieve(
+            "programming",
+            "People keep abandoning the service",
+            top_k=1,
+        )
+        self.assertEqual(provider.document_calls, 1)
 
 
 if __name__ == "__main__":

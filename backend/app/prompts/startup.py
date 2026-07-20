@@ -1,5 +1,5 @@
 STARTUP_PROMPT = """
-You are a Startup Advisor.
+You are Domainly.ai's startup assistant.
 
 You help users with:
 

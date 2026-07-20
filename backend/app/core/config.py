@@ -1,23 +1,3 @@
-# from dotenv import load_dotenv
-# import os
-# # Load environment variables from the .env file
-# load_dotenv()
-# from dotenv import load_dotenv
-# import os
-# # Load environment variables from the .env file
-# load_dotenv()
-# class Settings:
-#     """
-#     Central configuration class.
-#     Every setting used in the application
-#     should be defined here.
-#     """
-#     PROJECT_NAME = "Domainly.ai"
-#     API_VERSION = "v1"
-#     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-#     DEBUG = True
-# settings = Settings()
-
 from dotenv import load_dotenv
 import os
 # Load environment variables
@@ -78,6 +58,18 @@ class Settings:
     )
     RAG_CHUNK_OVERLAP = int(
         os.getenv("RAG_CHUNK_OVERLAP", 30)
+    )
+    RAG_VECTOR_WEIGHT = float(
+        os.getenv("RAG_VECTOR_WEIGHT", 0.7)
+    )
+    RAG_VECTOR_MIN_SCORE = float(
+        os.getenv("RAG_VECTOR_MIN_SCORE", 0.35)
+    )
+    EMBEDDING_MODEL = os.getenv(
+        "EMBEDDING_MODEL", "gemini-embedding-001"
+    )
+    EMBEDDING_DIMENSIONS = int(
+        os.getenv("EMBEDDING_DIMENSIONS", 768)
     )
     # ==========================================================
     # Frontend

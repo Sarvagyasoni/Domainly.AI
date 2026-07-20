@@ -33,7 +33,21 @@ A professional multi-domain AI assistant backend powered by FastAPI and Google G
 
 ## Local RAG
 
-Knowledge documents live in `app/knowledge_base`. For each chat request, the backend splits the selected domain document into overlapping chunks, ranks them with BM25 lexical relevance, and adds only the top passages to the Gemini prompt. The implementation runs locally and does not require an embedding API or vector database.
+Knowledge documents live in `app/knowledge_base`. The backend splits the selected domain document into overlapping chunks and uses hybrid retrieval: Gemini semantic embeddings plus BM25 lexical relevance. Semantic similarity receives 70% of the default combined score and BM25 receives 30%, preserving both meaning-based and exact-term matches.
+
+Document embeddings use `RETRIEVAL_DOCUMENT`; questions use `RETRIEVAL_QUERY`. Per-domain vectors are persisted under `app/storage/vector_indexes` and are rebuilt automatically when the knowledge text, embedding model, or vector dimensions change. If embeddings are not configured or an embedding request fails, retrieval automatically falls back to BM25.
+
+## Conversation Database
+
+Conversations and messages are stored in SQLite at `app/storage/domainly.db`.
+The database uses separate `conversations` and `messages` tables, foreign-key
+cascade deletion, UTC timestamps, lookup indexes, and WAL journaling. The
+backend automatically imports the previous `conversations.json` data when the
+SQLite database is first created and empty.
+
+The frontend loads `/conversations` on startup, creates chats through the API,
+and includes `chat_id` in generation requests. Completed normal and streaming
+responses are therefore restored after a browser refresh.
 
 ## Running the Server
 

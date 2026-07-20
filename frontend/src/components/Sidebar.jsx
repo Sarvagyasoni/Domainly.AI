@@ -6,7 +6,9 @@ function Sidebar({
     conversations = [],
     activeConversationId,
     onSelectConversation,
-    onNewChat
+    onNewChat,
+    onDeleteConversation,
+    deletingConversationId
 }) {
     const domains = [
         { id: "programming", name: "Programming" },
@@ -41,13 +43,28 @@ function Sidebar({
                     <p className="history-empty">No chats yet for this domain.</p>
                 ) : (
                     conversations.map((conversation) => (
-                        <button
-                            key={conversation.id}
-                            className={`history-item ${activeConversationId === conversation.id ? "history-active" : ""}`}
-                            onClick={() => onSelectConversation(selectedDomain, conversation.id)}
-                        >
-                            {conversation.title}
-                        </button>
+                        <div className="history-item-row" key={conversation.id}>
+                            <button
+                                type="button"
+                                className="delete-chat-btn"
+                                aria-label={`Delete ${conversation.title}`}
+                                title="Delete chat"
+                                disabled={deletingConversationId === conversation.id}
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                    onDeleteConversation(selectedDomain, conversation.id);
+                                }}
+                            >
+                                &minus;
+                            </button>
+                            <button
+                                type="button"
+                                className={`history-item ${activeConversationId === conversation.id ? "history-active" : ""}`}
+                                onClick={() => onSelectConversation(selectedDomain, conversation.id)}
+                            >
+                                {conversation.title}
+                            </button>
+                        </div>
                     ))
                 )}
             </div>

@@ -1,11 +1,16 @@
 import math
 import re
+import logging
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import ClassVar
 
 from app.core.config import settings
+from app.providers.embedding_provider import GeminiEmbeddingProvider
+from app.services.vector_index_service import VectorIndexService
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -24,6 +29,7 @@ class KnowledgeBaseService:
 
     BASE_DIR = Path(__file__).resolve().parent.parent / "knowledge_base"
     _chunk_cache: ClassVar[dict[str, list[KnowledgeChunk]]] = {}
+    embedding_provider: ClassVar[GeminiEmbeddingProvider] = GeminiEmbeddingProvider()
 
     # Very common terms add noise to lexical retrieval and are ignored.
     STOP_WORDS = {
@@ -108,11 +114,48 @@ class KnowledgeBaseService:
         query: str,
         top_k: int | None = None,
     ) -> list[KnowledgeChunk]:
-        """Rank chunks with BM25 and return the most relevant results."""
+        """Combine semantic vector similarity and BM25 lexical relevance."""
         chunks = cls._load_chunks(domain)
         query_tokens = set(cls._tokenize(query))
         if not chunks or not query_tokens:
             return []
+
+        lexical_scores = cls._bm25_scores(chunks, query_tokens)
+        vector_scores = cls._vector_scores(domain, chunks, query)
+
+        max_lexical = max(lexical_scores.values(), default=0.0)
+        vector_weight = min(max(settings.RAG_VECTOR_WEIGHT, 0.0), 1.0)
+        combined: list[tuple[float, KnowledgeChunk]] = []
+
+        for index, chunk in enumerate(chunks):
+            lexical = lexical_scores.get(index, 0.0)
+            normalized_lexical = lexical / max_lexical if max_lexical else 0.0
+            vector = vector_scores.get(index, 0.0)
+
+            # With embeddings enabled, weak semantic matches do not retrieve
+            # arbitrary content. Exact BM25 matches remain eligible.
+            if lexical <= 0 and vector < settings.RAG_VECTOR_MIN_SCORE:
+                continue
+            if vector_scores:
+                score = (
+                    vector_weight * max(vector, 0.0)
+                    + (1 - vector_weight) * normalized_lexical
+                )
+            else:
+                score = normalized_lexical
+            combined.append((score, chunk))
+
+        limit = top_k if top_k is not None else settings.RAG_TOP_K
+        combined.sort(key=lambda item: item[0], reverse=True)
+        return [chunk for _, chunk in combined[:limit]]
+
+    @classmethod
+    def _bm25_scores(
+        cls,
+        chunks: list[KnowledgeChunk],
+        query_tokens: set[str],
+    ) -> dict[int, float]:
+        """Return BM25 scores keyed by chunk position."""
 
         document_frequencies = Counter(
             token
@@ -122,9 +165,9 @@ class KnowledgeBaseService:
         average_length = sum(len(chunk.tokens) for chunk in chunks) / len(chunks)
         k1 = 1.5
         b = 0.75
-        scored: list[tuple[float, KnowledgeChunk]] = []
+        scored: dict[int, float] = {}
 
-        for chunk in chunks:
+        for index, chunk in enumerate(chunks):
             frequencies = Counter(chunk.tokens)
             score = 0.0
             for token in query_tokens:
@@ -143,11 +186,45 @@ class KnowledgeBaseService:
                     frequency * (k1 + 1) / length_normalization
                 )
             if score > 0:
-                scored.append((score, chunk))
+                scored[index] = score
+        return scored
 
-        limit = top_k if top_k is not None else settings.RAG_TOP_K
-        scored.sort(key=lambda item: item[0], reverse=True)
-        return [chunk for _, chunk in scored[:limit]]
+    @staticmethod
+    def _cosine_similarity(left: list[float], right: list[float]) -> float:
+        if len(left) != len(right) or not left:
+            return 0.0
+        dot_product = sum(a * b for a, b in zip(left, right))
+        left_norm = math.sqrt(sum(value * value for value in left))
+        right_norm = math.sqrt(sum(value * value for value in right))
+        if not left_norm or not right_norm:
+            return 0.0
+        return dot_product / (left_norm * right_norm)
+
+    @classmethod
+    def _vector_scores(
+        cls,
+        domain: str,
+        chunks: list[KnowledgeChunk],
+        query: str,
+    ) -> dict[int, float]:
+        provider = cls.embedding_provider
+        if not provider.available:
+            return {}
+        try:
+            texts = [f"{chunk.section}\n{chunk.text}" for chunk in chunks]
+            vectors = VectorIndexService.get_vectors(domain, texts, provider)
+            query_vector = provider.embed_query(query)
+            return {
+                index: cls._cosine_similarity(query_vector, vector)
+                for index, vector in enumerate(vectors)
+            }
+        except Exception as error:
+            logger.warning(
+                "Vector retrieval failed for %s; using BM25 fallback: %s",
+                domain,
+                error,
+            )
+            return {}
 
     @classmethod
     def format_context(cls, chunks: list[KnowledgeChunk]) -> str:

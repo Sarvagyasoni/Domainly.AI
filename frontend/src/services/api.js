@@ -13,13 +13,30 @@ export const sendMessage = async (domain, message, history) => {
     return response.data;
 };
 
-export const streamMessage = async (domain, message, history, onChunk, signal) => {
+export const getConversations = async () => {
+    const response = await API.get("/conversations");
+    return response.data;
+};
+
+export const createConversation = async (domain) => {
+    const response = await API.post("/conversations", null, {
+        params: { domain }
+    });
+    return response.data;
+};
+
+export const deleteConversation = async (chatId) => {
+    await API.delete(`/conversations/${chatId}`);
+};
+
+export const streamMessage = async (chatId, domain, message, history, onChunk, signal) => {
     const response = await fetch("http://127.0.0.1:8000/chat/stream", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
+            chat_id: chatId,
             domain,
             message,
             history

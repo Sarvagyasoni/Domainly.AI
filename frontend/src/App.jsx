@@ -3,7 +3,12 @@ import "./styles/app.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import ChatWindow from "./components/ChatWindow";
-import { streamMessage } from "./services/api";
+import {
+    createConversation,
+    deleteConversation,
+    getConversations,
+    streamMessage
+} from "./services/api";
 
 const domainProfiles = {
     programming: {
@@ -66,32 +71,32 @@ const createWelcomeMessage = (domain) => ({
     text: `Hello! I’m Domainly.ai. I can help with ${domainProfiles[domain].name.toLowerCase()} and related work.`
 });
 
-const createSession = (domain) => ({
-    id: `${domain}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    title: `${domainProfiles[domain].name} Chat`,
-    messages: [createWelcomeMessage(domain)]
+const toUiSession = (conversation) => ({
+    id: conversation.id,
+    title: conversation.title === "New Chat"
+        ? `${domainProfiles[conversation.domain].name} Chat`
+        : conversation.title,
+    messages: [
+        createWelcomeMessage(conversation.domain),
+        ...conversation.messages.map((message, index) => ({
+            id: `${conversation.id}-${message.role}-${message.timestamp}-${index}`,
+            sender: message.role === "user" ? "user" : "bot",
+            type: message.role === "assistant"
+                ? "answer"
+                : message.role === "system" ? "system" : "user",
+            text: message.content
+        }))
+    ]
 });
 
-const buildInitialConversations = () => {
-    const initial = {};
-    Object.keys(domainProfiles).forEach((domain) => {
-        initial[domain] = [createSession(domain)];
-    });
-    return initial;
-};
-
-const initialConversations = buildInitialConversations();
-const initialActiveConversationIds = Object.fromEntries(
-    Object.keys(initialConversations).map((domain) => [domain, initialConversations[domain][0].id])
-);
-
 function App() {
-    const [conversations, setConversations] = useState(initialConversations);
+    const [conversations, setConversations] = useState({});
     const [selectedDomain, setSelectedDomain] = useState("programming");
-    const [activeConversationIds, setActiveConversationIds] = useState(initialActiveConversationIds);
+    const [activeConversationIds, setActiveConversationIds] = useState({});
     const [loading, setLoading] = useState(false);
     const [thinkingDots, setThinkingDots] = useState(".");
     const [activeController, setActiveController] = useState(null);
+    const [deletingConversationId, setDeletingConversationId] = useState(null);
     const [theme, setTheme] = useState(() => localStorage.getItem("domainly-theme") || "light");
 
     useEffect(() => {
@@ -112,6 +117,34 @@ function App() {
     useEffect(() => {
         localStorage.setItem("domainly-theme", theme);
     }, [theme]);
+
+    useEffect(() => {
+        let cancelled = false;
+        getConversations()
+            .then((savedConversations) => {
+                if (cancelled) return;
+                const grouped = Object.fromEntries(
+                    Object.keys(domainProfiles).map((domain) => [domain, []])
+                );
+                savedConversations.forEach((conversation) => {
+                    if (grouped[conversation.domain]) {
+                        grouped[conversation.domain].push(toUiSession(conversation));
+                    }
+                });
+                setConversations(grouped);
+                setActiveConversationIds(
+                    Object.fromEntries(
+                        Object.entries(grouped)
+                            .filter(([, sessions]) => sessions.length > 0)
+                            .map(([domain, sessions]) => [domain, sessions[0].id])
+                    )
+                );
+            })
+            .catch((error) => console.error("Could not load conversations", error));
+        return () => {
+            cancelled = true;
+        };
+    }, []);
 
     const currentSession = conversations[selectedDomain]?.find(
         (session) => session.id === activeConversationIds[selectedDomain]
@@ -141,14 +174,19 @@ function App() {
         });
     };
 
-    const openNewChatForDomain = (domain) => {
-        const newSession = createSession(domain);
-        setSelectedDomain(domain);
-        setConversations((prev) => ({
-            ...prev,
-            [domain]: [newSession, ...(prev[domain] ?? [])]
-        }));
-        setActiveConversationIds((prev) => ({ ...prev, [domain]: newSession.id }));
+    const openNewChatForDomain = async (domain) => {
+        try {
+            const conversation = await createConversation(domain);
+            const newSession = toUiSession(conversation);
+            setSelectedDomain(domain);
+            setConversations((prev) => ({
+                ...prev,
+                [domain]: [newSession, ...(prev[domain] ?? [])]
+            }));
+            setActiveConversationIds((prev) => ({ ...prev, [domain]: newSession.id }));
+        } catch (error) {
+            console.error("Could not create conversation", error);
+        }
     };
 
     const switchDomain = (domain) => {
@@ -158,6 +196,41 @@ function App() {
     const selectConversation = (domain, conversationId) => {
         setSelectedDomain(domain);
         setActiveConversationIds((prev) => ({ ...prev, [domain]: conversationId }));
+    };
+
+    const removeConversation = async (domain, conversationId) => {
+        if (deletingConversationId || (loading && activeConversationIds[domain] === conversationId)) {
+            return;
+        }
+        setDeletingConversationId(conversationId);
+        try {
+            await deleteConversation(conversationId);
+            const remaining = (conversations[domain] ?? []).filter(
+                (conversation) => conversation.id !== conversationId
+            );
+            setConversations((prev) => ({
+                ...prev,
+                [domain]: (prev[domain] ?? []).filter(
+                    (conversation) => conversation.id !== conversationId
+                )
+            }));
+            setActiveConversationIds((prev) => {
+                if (prev[domain] !== conversationId) {
+                    return prev;
+                }
+                const next = { ...prev };
+                if (remaining[0]) {
+                    next[domain] = remaining[0].id;
+                } else {
+                    delete next[domain];
+                }
+                return next;
+            });
+        } catch (error) {
+            console.error("Could not delete conversation", error);
+        } finally {
+            setDeletingConversationId(null);
+        }
     };
 
     const dismissSuggestion = (messageId) => {
@@ -205,8 +278,23 @@ function App() {
         }
 
         const domain = selectedDomain;
-        const conversationId = activeConversationIds[domain] ?? conversations[domain]?.[0]?.id;
-        const history = (conversations[domain]?.find((session) => session.id === conversationId)?.messages ?? [])
+        let conversationId = activeConversationIds[domain] ?? conversations[domain]?.[0]?.id;
+        let domainConversations = conversations[domain] ?? [];
+        if (!conversationId) {
+            const created = await createConversation(domain);
+            const newSession = toUiSession(created);
+            conversationId = created.id;
+            domainConversations = [newSession];
+            setConversations((prev) => ({
+                ...prev,
+                [domain]: [newSession, ...(prev[domain] ?? [])]
+            }));
+            setActiveConversationIds((prev) => ({
+                ...prev,
+                [domain]: conversationId
+            }));
+        }
+        const history = (domainConversations.find((session) => session.id === conversationId)?.messages ?? [])
             .filter((msg) => msg.type === "user" || msg.type === "answer")
             .map((msg) => ({
                 role: msg.sender === "bot" ? "assistant" : "user",
@@ -236,6 +324,7 @@ function App() {
 
         try {
             await streamMessage(
+                conversationId,
                 domain,
                 trimmed,
                 history,
@@ -361,6 +450,8 @@ function App() {
                     activeConversationId={activeConversationIds[selectedDomain]}
                     onSelectConversation={selectConversation}
                     onNewChat={() => openNewChatForDomain(selectedDomain)}
+                    onDeleteConversation={removeConversation}
+                    deletingConversationId={deletingConversationId}
                 />
                 <ChatWindow
                     messages={messages}
