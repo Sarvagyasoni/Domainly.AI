@@ -1,0 +1,77 @@
+DOMAINLY.AI - STARTUP KNOWLEDGE BASE
+
+=== CORE FRAMEWORKS ===
+- MVP (Minimum Viable Product): the smallest version of a product that
+  lets you test your core hypothesis with real users.
+- Product-Market Fit: the point where demand is strong enough that
+  growth becomes primarily a distribution problem, not a demand problem.
+- Lean Startup loop: Build -> Measure -> Learn, repeated in short cycles,
+  pivoting or persevering based on validated learning.
+- Jobs-to-be-Done (JTBD): customers "hire" a product to do a job in
+  their life; understand the job, not just the demographic.
+- Blue Ocean Strategy: compete in uncontested market space instead of
+  fighting head-to-head in a saturated one ("red ocean").
+
+=== EARLY-STAGE VALIDATION ===
+1. Talk to potential customers before writing code; validate the problem
+   exists and is painful enough that people would pay to solve it.
+2. Look for "hair on fire" problems - ones people are already trying
+   (and paying) to solve, even with bad workarounds.
+3. Track a small number of core metrics (activation, retention, referral)
+   rather than vanity metrics like total signups or app downloads.
+4. A landing page + waitlist or a manual "concierge MVP" (doing the
+   service by hand before automating) can validate demand before you
+   build anything.
+5. Watch what users actually do, not just what they say they'd do -
+   stated preference often differs from revealed preference.
+
+=== FUNDRAISING BASICS ===
+- Pre-seed/seed rounds typically fund 12-18 months of runway.
+- A cap table tracks ownership percentages across founders, employees,
+  and investors; dilution happens with each new funding round.
+- SAFEs (Simple Agreements for Future Equity) and convertible notes are
+  common early-stage instruments that convert to equity at a future
+  priced round, usually with a valuation cap and/or discount.
+- Term sheets: key terms to understand include valuation (pre/post-
+  money), liquidation preference, board seats, and anti-dilution
+  provisions.
+- Investors generally evaluate: team, market size (TAM/SAM/SOM),
+  traction, and defensibility (moat).
+- Bootstrapping (self-funding via revenue) trades slower growth for
+  full ownership and control - a valid path, not just "not fundable."
+
+=== GROWTH & MARKETING ===
+- AARRR framework (Pirate Metrics): Acquisition, Activation, Retention,
+  Referral, Revenue - a funnel for thinking about growth systematically.
+- CAC (Customer Acquisition Cost) vs LTV (Lifetime Value): a healthy
+  business generally needs LTV to be at least 3x CAC.
+- Channels to test: content/SEO (slow, compounding), paid ads (fast,
+  costly), partnerships, community-led growth, cold outreach.
+- Product-led growth: the product itself drives acquisition (referrals,
+  virality, freemium conversion) rather than relying solely on sales/
+  marketing spend.
+- Retention is usually the highest-leverage metric to improve early -
+  growth on top of a leaky bucket doesn't compound.
+
+=== COMMON EARLY MISTAKES ===
+- Building too much before validating demand ("premature scaling").
+- Hiring ahead of revenue/traction, increasing burn rate unsustainably.
+- Ignoring unit economics (cost to acquire a customer vs. their
+  lifetime value) in pursuit of growth at any cost.
+- Chasing too many customer segments at once instead of dominating one
+  niche first.
+- Co-founder misalignment on equity split, roles, or vision - resolve
+  this explicitly and in writing early, not informally.
+
+=== BUSINESS FUNDAMENTALS ===
+- Runway: how many months a company can operate before running out of
+  cash at current burn rate; a critical number to track weekly/monthly.
+- Gross margin: revenue minus cost of goods sold, expressed as a
+  percentage - SaaS businesses typically target 70-90%+ gross margins.
+- MRR/ARR (Monthly/Annual Recurring Revenue): the standard growth
+  metric for subscription businesses.
+- Churn: the rate at which customers cancel/stop paying; reducing churn
+  is often cheaper than acquiring new customers to replace lost ones.
+- Legal basics: choose an entity structure (e.g. LLC, C-Corp) based on
+  fundraising plans and tax considerations; formalize IP ownership and
+  co-founder agreements early to avoid disputes later.

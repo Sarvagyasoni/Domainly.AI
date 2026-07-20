@@ -1,0 +1,77 @@
+# from dotenv import load_dotenv
+# import os
+# # Load environment variables from the .env file
+# load_dotenv()
+# from dotenv import load_dotenv
+# import os
+# # Load environment variables from the .env file
+# load_dotenv()
+# class Settings:
+#     """
+#     Central configuration class.
+#     Every setting used in the application
+#     should be defined here.
+#     """
+#     PROJECT_NAME = "Domainly.ai"
+#     API_VERSION = "v1"
+#     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+#     DEBUG = True
+# settings = Settings()
+
+from dotenv import load_dotenv
+import os
+# Load environment variables
+load_dotenv()
+class Settings:
+    """
+    Central application configuration.
+    Every configurable value used throughout the project
+    should be defined here instead of being hardcoded
+    in service or provider files.
+    """
+    # ==========================================================
+    # Application
+    # ==========================================================
+    PROJECT_NAME = "Domainly.ai"
+    API_VERSION = "v1"
+    DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+    # ==========================================================
+    # Gemini Configuration
+    # ==========================================================
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+    GEMINI_MODEL = os.getenv(
+        "GEMINI_MODEL",
+        "gemini-2.5-flash"
+    )
+    # ==========================================================
+    # AI Generation Configuration
+    # ==========================================================
+    TEMPERATURE = float(
+        os.getenv("TEMPERATURE", 0.7)
+    )
+    TOP_P = float(
+        os.getenv("TOP_P", 0.95)
+    )
+    TOP_K = int(
+        os.getenv("TOP_K", 40)
+    )
+    MAX_OUTPUT_TOKENS = int(
+        os.getenv("MAX_OUTPUT_TOKENS", 2048)
+    )
+    # ==========================================================
+    # API Configuration
+    # ==========================================================
+    REQUEST_TIMEOUT = int(
+        os.getenv("REQUEST_TIMEOUT", 30)
+    )
+    MAX_RETRIES = int(
+        os.getenv("MAX_RETRIES", 3)
+    )
+    # ==========================================================
+    # Frontend
+    # ==========================================================
+    FRONTEND_URL = os.getenv(
+        "FRONTEND_URL",
+        "http://localhost:5173"
+    )
+settings = Settings()

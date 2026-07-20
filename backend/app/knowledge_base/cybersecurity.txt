@@ -1,0 +1,92 @@
+DOMAINLY.AI - CYBERSECURITY KNOWLEDGE BASE
+
+=== CORE PRINCIPLES ===
+- CIA Triad: Confidentiality, Integrity, Availability - the three
+  pillars most security controls aim to protect.
+- Principle of Least Privilege: users/systems should only have the
+  minimum access needed to do their job.
+- Defense in Depth: layer multiple security controls so no single
+  failure compromises the whole system.
+- Zero Trust: never automatically trust a request based on network
+  location alone; verify every request regardless of origin.
+- Attack surface: the sum of all points where an attacker could try to
+  enter or extract data - minimizing it (fewer exposed services,
+  simpler code paths) reduces risk.
+
+=== COMMON WEB VULNERABILITIES (OWASP-STYLE) ===
+- SQL Injection: unsanitized input allows attackers to run arbitrary
+  SQL. Mitigation: parameterized queries / prepared statements, never
+  string-concatenate user input into queries.
+- Cross-Site Scripting (XSS): unsanitized input rendered as executable
+  script in a browser. Mitigation: output encoding, Content-Security-
+  Policy headers, sanitizing HTML input.
+- Cross-Site Request Forgery (CSRF): tricking a logged-in user's
+  browser into making unwanted requests. Mitigation: CSRF tokens,
+  SameSite cookies.
+- Broken Authentication: weak session management or password handling.
+  Mitigation: hashed+salted passwords (bcrypt/argon2), MFA, secure
+  session tokens with expiry.
+- Insecure Direct Object References (IDOR): accessing other users' data
+  by changing an ID in a URL/request. Mitigation: always verify the
+  requesting user is authorized for that specific resource.
+- Security Misconfiguration: default credentials, verbose error
+  messages, unnecessary services exposed. Mitigation: harden defaults,
+  disable debug mode in production.
+
+=== NETWORK SECURITY ===
+- Firewalls filter traffic based on rules (IP, port, protocol); WAFs
+  (Web Application Firewalls) filter at the HTTP layer against known
+  attack patterns.
+- VPNs encrypt traffic between endpoints, commonly used to secure
+  remote access to internal networks.
+- Man-in-the-Middle (MITM) attacks intercept communication between two
+  parties; HTTPS/TLS mitigates this via encryption and certificate
+  verification.
+- Port scanning is often a reconnaissance step before an attack;
+  closing unused ports reduces attack surface.
+
+=== CRYPTOGRAPHY BASICS ===
+- Symmetric encryption (e.g. AES): same key encrypts and decrypts -
+  fast, but key distribution is a challenge.
+- Asymmetric encryption (e.g. RSA, ECC): public key encrypts, private
+  key decrypts - solves key distribution but slower than symmetric.
+- Hashing (e.g. SHA-256) is one-way and used for integrity checks and
+  password storage (with salting) - never use hashing alone for
+  encryption purposes.
+- TLS/SSL secures data in transit using a handshake that combines
+  asymmetric encryption (key exchange) with symmetric encryption (bulk
+  data transfer).
+- Never write your own cryptography - use well-vetted, established
+  libraries and algorithms.
+
+=== SECURE DEVELOPMENT PRACTICES ===
+1. Never store secrets (API keys, passwords, tokens) in source code or
+   version control - use environment variables or a secrets manager.
+2. Validate and sanitize all user input on the server side, not just
+   client side (client-side validation is a UX feature, not security).
+3. Keep dependencies up to date; many breaches exploit known
+   vulnerabilities in outdated libraries (check via tools like
+   `npm audit` or `pip-audit`).
+4. Use HTTPS everywhere; never transmit credentials over plain HTTP.
+5. Apply rate limiting on authentication endpoints to slow down
+   brute-force attacks.
+6. Log security-relevant events (failed logins, permission changes)
+   without logging sensitive data itself (passwords, full card numbers).
+
+=== INCIDENT RESPONSE ===
+- Standard lifecycle: Identify -> Contain -> Eradicate -> Recover ->
+  Lessons Learned.
+- Preserve logs and evidence before remediating, when possible, for
+  post-incident analysis and potential legal/compliance needs.
+- Have an incident response plan documented before an incident happens -
+  deciding roles and steps during a live breach wastes critical time.
+
+=== SOCIAL ENGINEERING ===
+- Phishing: fraudulent messages impersonating trusted sources to steal
+  credentials or install malware; spear-phishing targets specific
+  individuals with tailored context.
+- Pretexting: fabricating a scenario to extract information (e.g.
+  impersonating IT support).
+- The strongest technical controls can be bypassed by tricking a human -
+  security awareness training is a necessary complement to technical
+  defenses, not optional.

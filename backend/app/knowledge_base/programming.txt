@@ -1,0 +1,117 @@
+DOMAINLY.AI - PROGRAMMING KNOWLEDGE BASE
+
+=== SOFTWARE DESIGN PRINCIPLES ===
+- SOLID: Single Responsibility, Open/Closed, Liskov Substitution,
+  Interface Segregation, Dependency Inversion.
+- DRY (Don't Repeat Yourself), KISS (Keep It Simple), YAGNI (You Aren't
+  Gonna Need It) - avoid building for hypothetical future requirements.
+- Prefer composition over inheritance when designing classes.
+- Separation of Concerns: each module/class/function should do one thing.
+- Law of Demeter: a unit should only talk to its immediate collaborators,
+  not reach through them to their internals ("don't talk to strangers").
+
+=== COMMON DESIGN PATTERNS ===
+- Singleton: ensures a class has only one instance (use sparingly - it
+  introduces global state and makes testing harder).
+- Factory: centralizes object creation logic so callers don't need to
+  know concrete classes.
+- Observer: objects subscribe to events/state changes (basis of most
+  UI frameworks and pub/sub systems).
+- Strategy: encapsulates interchangeable algorithms behind a common
+  interface, selected at runtime.
+- Decorator: adds behavior to an object dynamically without modifying
+  its class (Python's @decorator syntax is a direct application).
+- Repository pattern: abstracts data access behind an interface so
+  business logic doesn't depend on the storage mechanism.
+
+=== DATA STRUCTURES & COMPLEXITY ===
+Time Complexity Cheat Sheet:
+- Array access by index: O(1)
+- Hash map get/set (average case): O(1)
+- Binary search on sorted array: O(log n)
+- Linear search / single traversal: O(n)
+- Merge sort, quick sort (average), heap sort: O(n log n)
+- Bubble sort, insertion sort, selection sort: O(n^2)
+- Nested loops over the same input: O(n^2)
+
+Choosing a data structure:
+- Need fast lookups by key: hash map / dictionary.
+- Need sorted order maintained: balanced BST or a sorted list with
+  bisect/binary insertion.
+- Need FIFO processing: queue.
+- Need LIFO processing (undo, backtracking, parsing): stack.
+- Need to repeatedly find the min/max: heap / priority queue.
+- Need to check membership fast with less memory than a hash set:
+  bloom filter (probabilistic, allows false positives).
+
+=== DEBUGGING METHODOLOGY ===
+1. Reproduce the bug reliably before attempting a fix.
+2. Isolate: comment out or bisect code until you find the smallest
+   failing case.
+3. Check inputs/outputs at each function boundary (print or debugger
+   breakpoints).
+4. Common culprits: off-by-one errors, mutable default arguments in
+   Python, floating point comparison with ==, timezone/locale issues,
+   race conditions in concurrent code.
+5. Read the full stack trace bottom-up; the root cause is often several
+   frames below where the error surfaced.
+6. Once fixed, write a regression test so the bug can't silently return.
+
+=== TESTING ===
+- Unit tests: test a single function/class in isolation, mocking
+  dependencies.
+- Integration tests: test multiple components working together
+  (e.g. API endpoint + database).
+- Test pyramid: many unit tests, fewer integration tests, very few
+  end-to-end tests - because e2e tests are slow and brittle.
+- Test edge cases explicitly: empty input, null/None, very large input,
+  duplicate values, boundary values (0, -1, max int).
+- Mocking: replace real dependencies (APIs, databases) with fake ones
+  in tests so tests are fast and deterministic.
+
+=== DATABASES ===
+- Normalization reduces data duplication by splitting data into related
+  tables (1NF, 2NF, 3NF); denormalization trades duplication for
+  read speed.
+- Indexes speed up reads (WHERE, JOIN, ORDER BY) but slow down writes
+  and use extra storage - index columns you filter/sort on often.
+- N+1 query problem: fetching a list then querying once per item in a
+  loop instead of one batched query - a common performance bug in ORMs.
+- ACID: Atomicity, Consistency, Isolation, Durability - guarantees
+  relational databases provide for transactions.
+- SQL vs NoSQL: choose SQL for structured relational data with strong
+  consistency needs; NoSQL (document/key-value/graph) for flexible
+  schemas or massive horizontal scale.
+
+=== API DESIGN ===
+- REST conventions: GET (read, no side effects), POST (create), PUT
+  (replace), PATCH (partial update), DELETE (remove).
+- Use proper HTTP status codes: 200 OK, 201 Created, 400 Bad Request,
+  401 Unauthorized, 403 Forbidden, 404 Not Found, 500 Internal Server
+  Error.
+- Version your APIs (e.g. /api/v1/...) so breaking changes don't break
+  existing clients.
+- Paginate list endpoints; never return unbounded result sets.
+- Validate and sanitize all input server-side, even if the frontend
+  already validates it.
+
+=== VERSION CONTROL (GIT) ===
+- Commit small, logical changes with clear, descriptive messages.
+- Use feature branches; avoid committing directly to main/master.
+- Rebase vs merge: rebase for a clean linear history on personal
+  branches, merge for preserving history on shared branches.
+- Never commit secrets, API keys, or .env files - use .gitignore and
+  environment variables instead.
+- Write meaningful commit messages: what changed and why, not just
+  "fixed bug" or "update".
+
+=== BEST PRACTICES ===
+- Name variables and functions for what they represent, not how they
+  work internally.
+- Handle errors explicitly; avoid bare except/catch blocks that swallow
+  all exceptions silently.
+- Prefer immutability where practical - it reduces a whole class of bugs
+  caused by unexpected shared-state mutation.
+- Comment on "why", not "what" - the code itself should explain what
+  it does if it's well-named; comments should explain reasoning that
+  isn't obvious from the code.

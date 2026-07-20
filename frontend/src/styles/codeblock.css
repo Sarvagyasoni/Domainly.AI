@@ -1,0 +1,29 @@
+.code-block {
+    margin: 15px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f2937;
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+.copy-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+.copy-btn:hover {
+    opacity: .8;
+}
+.language {
+    text-transform: uppercase;
+    font-weight: bold;
+}

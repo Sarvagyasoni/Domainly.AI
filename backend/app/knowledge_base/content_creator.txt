@@ -1,0 +1,86 @@
+DOMAINLY.AI - CONTENT CREATOR KNOWLEDGE BASE
+
+=== CONTENT STRATEGY BASICS ===
+- Pick a niche narrow enough to build authority, wide enough to sustain
+  content ideas long-term ("riches are in the niches").
+- Consistency (a regular posting schedule) generally matters more for
+  platform algorithms than occasional high-effort spikes.
+- Repurpose one piece of "pillar" content (e.g. a long video or article)
+  into multiple short-form clips, posts, carousels, and threads.
+- Content pillars: define 3-5 recurring themes/categories so your
+  content stays focused and audiences know what to expect from you.
+
+=== PLATFORM-SPECIFIC NOTES ===
+- Short-form video (Reels/Shorts/TikTok): hook viewers in the first
+  1-3 seconds or they scroll away; captions matter since many watch on
+  mute.
+- YouTube: thumbnail + title drive click-through rate; audience
+  retention in the first 30 seconds heavily influences algorithmic
+  recommendation and watch time overall.
+- Instagram: carousels and Reels currently tend to get more organic
+  reach than single static image posts; Stories are useful for
+  behind-the-scenes and direct engagement (polls, Q&A).
+- Newsletters/blogs: a clear, specific subject line/headline
+  outperforms a clever but vague one; open rate depends heavily on
+  subject line, click rate depends on content relevance.
+- LinkedIn: text-based storytelling posts and carousels (PDF slides)
+  often outperform external links, since the algorithm favors content
+  that keeps users on-platform.
+- Podcasts: discoverability is weaker than video/social, so cross-
+  promotion (clips on social, guest appearances) matters more for
+  growth.
+
+=== GROWTH FUNDAMENTALS ===
+1. Study what already works in your niche before inventing something
+   entirely new - look at top-performing content and understand why it
+   works structurally, not just copy the topic.
+2. Engage with your audience in comments/replies; early engagement
+   signals often boost algorithmic reach in the first hour after
+   posting.
+3. Collaborate with creators of similar size for cross-audience
+   exposure - avoid only reaching out to much larger creators.
+4. Track a few key metrics (watch time / open rate / saves / shares)
+   rather than obsessing over follower count alone - follower count is
+   a vanity metric that doesn't directly indicate business value.
+5. Saves and shares are increasingly weighted by algorithms as stronger
+   signals of quality than likes, since they indicate genuine value to
+   the viewer.
+
+=== SEO BASICS (FOR BLOGS/YOUTUBE) ===
+- Keyword research: target terms with real search volume but
+  achievable competition, especially early on (long-tail keywords).
+- On-page SEO: descriptive titles, headers (H1/H2), alt text on images,
+  and internal linking between your own content.
+- YouTube SEO: title, description, and tags should include the terms
+  viewers actually search, plus closed captions can improve
+  discoverability.
+- Backlinks (other sites linking to yours) remain a strong ranking
+  signal for blogs/websites.
+
+=== MONETIZATION BASICS ===
+- Diversify income: sponsorships/brand deals, affiliate links, digital
+  products (courses, templates), memberships/subscriptions
+  (Patreon-style), ad revenue.
+- Build an email list early - it's an audience channel you fully own,
+  unlike a platform following that can disappear overnight with
+  algorithm or policy changes.
+- Sponsorship rates are typically benchmarked against engagement rate
+  and audience demographics, not just raw follower count.
+- Digital products (courses, templates, presets) generally have the
+  highest margins since there's no per-unit cost after creation.
+
+=== CONTENT PRODUCTION WORKFLOW ===
+- Batch content creation (filming/writing multiple pieces in one
+  session) reduces context-switching overhead and burnout.
+- Maintain a content calendar to plan themes/topics ahead rather than
+  scrambling daily for ideas.
+- Repurposing workflow example: long-form video -> pull 3-5 short clips
+  -> write a text summary/thread -> turn key quotes into image posts.
+
+=== ANALYTICS & FEEDBACK ===
+- Watch/read-through rate indicates whether your hook and pacing are
+  working - a steep early drop-off usually means the hook is weak.
+- A/B test thumbnails, titles, and posting times where the platform
+  allows it, rather than guessing.
+- Audience retention graphs (YouTube) reveal exactly where viewers drop
+  off, which is more actionable than an average view duration alone.

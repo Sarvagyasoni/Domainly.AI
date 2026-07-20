@@ -1,0 +1,29 @@
+.response-actions{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:10px;
+    padding-top:2px;
+}
+.response-copy{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:30px;
+    height:30px;
+    border:1px solid var(--border);
+    background:var(--surface-muted);
+    color:var(--accent-strong);
+    padding:0;
+    border-radius:8px;
+    cursor:pointer;
+    transition:background .2s, color .2s, transform .2s;
+}
+.response-copy svg{
+    width:16px;
+    height:16px;
+}
+.response-copy:hover{
+    background:var(--accent);
+    color:white;
+    transform:translateY(-1px);
+}

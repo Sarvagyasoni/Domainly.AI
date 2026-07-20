@@ -1,0 +1,86 @@
+DOMAINLY.AI - GAMING KNOWLEDGE BASE
+
+=== CORE CONCEPTS & TERMINOLOGY ===
+- "Meta" refers to the currently most effective strategies/builds in a
+  game, shifting as patches and balance updates release.
+- "Frame data" in fighting games: startup, active, and recovery frames
+  for a move, used to calculate advantage/disadvantage on hit or block.
+- "Tick rate" in shooters: how often the server updates game state;
+  higher tick rate generally means more accurate hit registration.
+- "RNG" (Random Number Generator): the system behind randomized drops,
+  crits, and procs; "RNG-heavy" games rely more on luck than skill.
+- "Aggro"/"threat": in RPGs/MMOs, the mechanic determining which enemy
+  targets which player, often managed by tanks.
+- "Ping/latency": delay between input and server response, critical in
+  competitive online games; high ping causes rubber-banding and hit-reg
+  issues.
+
+=== GENRES OVERVIEW ===
+- FPS (First-Person Shooter): reflex and aim-focused, e.g. tactical
+  shooters (slower, tactical positioning) vs arena shooters (fast,
+  movement-heavy).
+- MOBA (Multiplayer Online Battle Arena): team-based, lane-pushing,
+  hero/champion progression within a single match.
+- RPG (Role-Playing Game): character progression, stats, narrative
+  choice; subtypes include ARPGs (action combat) and turn-based RPGs.
+- Roguelike/Roguelite: procedurally generated runs, permadeath, meta-
+  progression between runs (roguelite) vs none (pure roguelike).
+- Battle Royale: last-player/team-standing, shrinking play area, loot-
+  based power progression within a single match.
+- Strategy (RTS/4X): resource management, base building, or empire-
+  building over longer time horizons.
+
+=== IMPROVING AT COMPETITIVE GAMES ===
+1. Review your own replays/VODs to identify repeated mistakes rather
+   than only watching pros.
+2. Focus on fundamentals (aim, positioning, resource/economy management)
+   before advanced techniques or niche strategies.
+3. Warm up with mechanical drills (aim trainers, practice modes) before
+   ranked/competitive play.
+4. Take breaks - fatigue measurably reduces reaction time and decision
+   quality after extended play sessions.
+5. Study matchup-specific knowledge (counters, timings) rather than
+   only general mechanical skill.
+6. Communicate with teammates concisely in team games - callouts should
+   be short and information-dense.
+
+=== GAME DESIGN BASICS ===
+- Core loop: the repeated cycle of actions a player performs (e.g. loot,
+  fight, upgrade, repeat) that the whole game is built around.
+- Difficulty curve should generally ramp gradually, with spikes reserved
+  for boss fights or milestone moments, not sustained frustration.
+- Player feedback (visual, audio, haptic) should be immediate and clear
+  so actions feel responsive ("game feel").
+- Reward schedules: variable-ratio rewards (unpredictable timing/size)
+  are the most engaging but also the most exploitative if used
+  irresponsibly (seen in loot boxes/gacha mechanics).
+- Onboarding should teach mechanics through play (guided first levels),
+  not walls of text.
+
+=== HARDWARE & PERFORMANCE ===
+- Frame rate consistency (low frame-time variance) often matters more
+  for how a game "feels" than raw average FPS.
+- Input lag comes from multiple sources: display response time,
+  peripherals, and the rendering pipeline (V-Sync can add noticeable
+  lag; consider G-Sync/FreeSync or capping FPS instead).
+- DLSS/FSR (upscaling tech) renders at a lower resolution and uses AI/
+  algorithms to upscale, trading a small quality loss for higher FPS.
+- CPU vs GPU bottleneck: if GPU usage is near 100% and FPS is capped by
+  it, you're GPU-bound; if GPU usage is low but FPS is still low, you're
+  likely CPU-bound (common in strategy/simulation games with many units).
+
+=== ESPORTS & MONETIZATION ===
+- Esports revenue streams: sponsorships, media rights, ticket sales,
+  in-game cosmetic sales tied to tournaments (e.g. battle passes).
+- "Free-to-play" (F2P) games typically monetize via cosmetics, battle
+  passes, or (in weaker designs) pay-to-win mechanics.
+- Live-service games rely on regular content updates (seasons, events)
+  to retain player engagement over years rather than a single release.
+
+=== GAME ENGINES (BASICS FOR ASPIRING DEVS) ===
+- Unity: C#-based, widely used for 2D/3D indie and mobile games, large
+  asset store and community.
+- Unreal Engine: C++/Blueprint (visual scripting), strong for high-
+  fidelity 3D graphics and AAA-style projects.
+- Godot: open-source, lightweight, GDScript (Python-like) or C#,
+  popular for 2D and smaller-scale 3D projects.
